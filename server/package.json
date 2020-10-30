@@ -1,0 +1,29 @@
+{
+  "name": "reversation",
+  "version": "1.0.0",
+  "description": "reservation ",
+  "main": "index.js",
+  "scripts": {
+    "start": "node server.js",
+    "nodemon": "nodemon server.js",
+    "test": "run"
+  },
+  "repository": {
+    "type": "git",
+    "url": "reservation.js"
+  },
+  "keywords": [
+    "key"
+  ],
+  "author": "JoãoAniceto",
+  "license": "ISC",
+  "dependencies": {
+    "cors": "^2.8.5",
+    "express": "^4.17.1",
+    "helmet": "^4.1.1",
+    "monk": "^7.3.2",
+    "morgan": "^1.10.0",
+    "random-key": "^0.3.2",
+    "twilio": "^3.50.0"
+  }
+}
