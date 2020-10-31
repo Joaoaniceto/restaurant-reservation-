@@ -4,7 +4,7 @@ const morgan = require('morgan');
 const cors = require('cors');
 const db = require('monk')('localhost:27017/dbreservation');
 const accountSid = "AC545fdaac14d6ffe55f915355347a09a7";
-const authToken = "818b0496693b288a60ba54863c6fcea0";
+const authToken = "c32bd1895a9cc6fc75b41a3a8720a732";
 const client = require('twilio')(accountSid, authToken);
 var rand = require("random-key");
 
@@ -25,14 +25,23 @@ app.get('/',(req,res) =>{
     })
 })
 
+const reservs = db.get('dbreservation');
+
+app.get('/db',async (req,res)=>{
+  const a = await reservs.find({});
+  res.json(a);
+})
+
+
+
 app.post('/reservation',(req,res)=>{
-  const a = rand.generate();
-  console.log(req.body);
+  var a = rand.generate();
+  reservs.insert(req.body);
   client.messages
   .create({
-     body: `${req.body.name}A sua reserva para ${req.body.number} ás ${req.body.datatime} está confirmada, mostre este chave para confirmar ${a} `,
+     body: `${req.body.name}A sua reserva para ${req.body.number} ás ${req.body.visitDate} está confirmada, mostre este chave para confirmar ${a} `,
      from: '+14159850934',
-     to: `+351${req.body.number}`
+     to: `+351${req.body.datatime}`
    })
   .then(message => console.log(message));
   res.json(req.body)

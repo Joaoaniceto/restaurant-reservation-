@@ -24,3 +24,24 @@ export async function sendmessage(data){
       error.response = json;
       throw error;
 }
+
+export async function receive(){
+  const response = await fetch(`Http://localhost:1337/db`, {
+      method: 'GET',
+      headers: {
+        'content-type': 'application/json',
+      },
+    });
+    let json;
+    if (response.headers.get('content-type').includes('text/html')) {
+      const message = await response.text();
+      json = {
+        message,
+      };
+    } else {
+      json = await response.json();
+    }
+    if (response.ok) {
+      return json;
+    }
+}
