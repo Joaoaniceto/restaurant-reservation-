@@ -36,7 +36,9 @@ app.get('/db',async (req,res)=>{
 
 app.post('/reservation',(req,res)=>{
   var a = rand.generate();
+  console.log(req.body.datatime);
   reservs.insert(req.body);
+
   client.messages
   .create({
      body: `${req.body.name}A sua reserva para ${req.body.number} ás ${req.body.visitDate} está confirmada, mostre este chave para confirmar ${a} `,
